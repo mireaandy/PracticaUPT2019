@@ -35,30 +35,18 @@
             {
                 this.bitArray = new BitVector(SIZE);
                 this.size = 0;
+
+                for(var position = 0; position < SIZE; position++)
+                        this.bitArray.setBit(position, 0);
+                
                 if(values)
                 {
                     this.size = values.length;
                     var posElementsArray = 0;
-                    var wasSet = false;
-                    for(var position = 0; position < SIZE; position++)
-                    {
-                        if(posElementsArray < values.length)
-                        {
-                            if(position === values[posElementsArray])
-                            {
-                                wasSet = 1;
-                                posElementsArray++;
-                                this.bitArray.setBit(position, 1);
-                            }
-                        }
-                        if(!wasSet)
-                            this.bitArray.setBit(position, 0);
-                        wasSet = false;
-                    }
+
+                    for(var posElementsArray = 0; posElementsArray < SIZE; posElementsArray++)
+                        this.bitArray.setBit(values[posElementsArray], 1);
                 }
-                else
-                    for(var position = 0; position < SIZE; position++)
-                        this.bitArray.setBit(position, 0);
             }
 
             Set.prototype.showElements = function()
@@ -72,10 +60,11 @@
             {
                 var result = new Set();
                 for(var position = 0; position < SIZE; position++)
-                {
                     if(setA.bitArray.isSet(position) || setB.bitArray.isSet(position))
+                    {
                         result.bitArray.setBit(position, 1);
-                }
+                        result.size++;
+                    }
                 return result;
             }
 
@@ -83,10 +72,11 @@
             {
                 var result = new Set();
                 for(var position = 0; position < SIZE; position++)
-                {
                     if(setA.bitArray.isSet(position) && setB.bitArray.isSet(position))
+                    {
                         result.bitArray.setBit(position, 1);
-                }
+                        result.size++;
+                    }
                 return result;
             }
 
@@ -94,27 +84,34 @@
             {
                 var result = new Set();
                 for(var position = 0; position < SIZE; position++)
-                {
                     if(setA.bitArray.isSet(position) && !setB.bitArray.isSet(position))
+                    {
                         result.bitArray.setBit(position, 1);
-                }
+                        result.size++;
+                    }
                 return result;
             }
 
             var A = new Set([1, 2, 3, 6, 7, 8]);
             var B = new Set([2, 3, 5, 9]);
 
+            console.log("lenght A :" + A.size);
+            console.log("lenght B :" + B.size);
+
             var resultAdd = Set.union(A, B);
+            console.log("lenght union :" + resultAdd.size);
             resultAdd.showElements();
 
             console.log(" ");
 
             var resultIntersect = Set.intersection(A, B);
+            console.log("lenght intersection :" + resultIntersect.size);
             resultIntersect.showElements();
 
             console.log(" ");
 
             var resultDifference = Set.difference(A, B);
+            console.log("lenght difference :" + resultDifference.size);
             resultDifference.showElements();
         </script>
     </body>
