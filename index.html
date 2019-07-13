@@ -4,8 +4,6 @@
         <title>Practica 2019 Tema 6</title>
     </head>
     <body>
-
-        <p id = "demo"></p>
         <script>
 
             const SIZE = 100000;
@@ -36,25 +34,31 @@
             var Set = function(values)
             {
                 this.bitArray = new BitVector(SIZE);
-                this.size = values.length;
-                var posElementsArray = 0;
-                var wasSet = false;
-
-                for(let position = 0; position < SIZE; position++)
+                this.size = 0;
+                if(values)
                 {
-                    if(posElementsArray < values.length)
+                    this.size = values.length;
+                    var posElementsArray = 0;
+                    var wasSet = false;
+                    for(var position = 0; position < SIZE; position++)
                     {
-                        if(position === values[posElementsArray])
+                        if(posElementsArray < values.length)
                         {
-                            wasSet = 1;
-                            posElementsArray++;
-                            this.bitArray.setBit(position, 1);
+                            if(position === values[posElementsArray])
+                            {
+                                wasSet = 1;
+                                posElementsArray++;
+                                this.bitArray.setBit(position, 1);
+                            }
                         }
+                        if(!wasSet)
+                            this.bitArray.setBit(position, 0);
+                        wasSet = false;
                     }
-                    if(!wasSet)
-                        this.bitArray.setBit(position, 0);
-                    wasSet = false;
                 }
+                else
+                    for(var position = 0; position < SIZE; position++)
+                        this.bitArray.setBit(position, 0);
             }
 
             Set.prototype.showElements = function()
@@ -62,25 +66,40 @@
                 for(let position = 0; position < SIZE; position++)
                         if(this.bitArray.isSet(position))
                             console.log(position);
-                        else 
-                            console.log("0");
             }
 
-            Set.prototype.union = function(setToAdd)
+            Set.union = function(setA, setB)
             {
+                var result = new Set();
                 for(var position = 0; position < SIZE; position++)
                 {
-                    if(setToAdd.bitArray.isSet(position))
-                        this.bitArray.setBit(position, 1);
+                    if(setA.bitArray.isSet(position) || setB.bitArray.isSet(position))
+                        result.bitArray.setBit(position, 1);
                 }
+                return result;
             }
 
-            var A = new Set([400, 401, 449, 4999, 69600]);
-            var B = new Set([600, 601, 602, 603, 604]);
+            Set.intersection = function(setA, setB)
+            {
+                var result = new Set();
+                for(var position = 0; position < SIZE; position++)
+                {
+                    if(setA.bitArray.isSet(position) && setB.bitArray.isSet(position))
+                        result.bitArray.setBit(position, 1);
+                }
+                return result;
+            }
 
-            A.union(B);
+            var A = new Set([1, 2, 3, 6, 7, 8]);
+            var B = new Set([2, 3, 5, 9]);
 
-            A.showElements();
+            var resultAdd = Set.union(A, B);
+            resultAdd.showElements();
+
+            console.log(" ");
+
+            var resultIntersect = Set.intersection(A, B);
+            resultIntersect.showElements();
 
         </script>
     </body>
