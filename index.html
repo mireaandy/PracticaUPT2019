@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Practica 2019 Tema 6</title>
+    </head>
+    <body>
+
+        <p id = "demo"></p>
+        <script>
+
+            const SIZE = 100000;
+
+            var BitVector = function(size)
+            {
+                this.store = [size/32+1];
+            }
+            BitVector.prototype.setBit = function(bit, val)
+            {
+                var index = ~~(bit / 32);
+                var shift = ~~(bit % 32);
+                var mask = 1 << shift;
+                if (val){
+                        this.store[index] = this.store[index] | mask;
+                } else {
+                        this.store[index] = this.store[index] & ~mask;
+                }
+            }
+            BitVector.prototype.isSet = function(bit)
+            {
+                var index = ~~(bit / 32);
+                var shift = ~~(bit % 32);
+                var mask = 1 << shift;
+                return (this.store[index] & mask) > 0;
+            }
+
+            var Set = function(values)
+            {
+                this.bitArray = new BitVector(SIZE);
+                this.size = values.length;
+                var posElementsArray = 0;
+                var wasSet = false;
+
+                for(let position = 0; position < SIZE; position++)
+                {
+                    if(posElementsArray < values.length)
+                    {
+                        if(position === values[posElementsArray])
+                        {
+                            wasSet = 1;
+                            posElementsArray++;
+                            this.bitArray.setBit(position, 1);
+                        }
+                    }
+                    if(!wasSet)
+                        this.bitArray.setBit(position, 0);
+                    wasSet = false;
+                }
+            }
+
+            Set.prototype.showElements = function()
+            {
+                for(let position = 0; position < SIZE; position++)
+                        if(this.bitArray.isSet(position))
+                            console.log(position);
+                        else 
+                            console.log("0");
+            }
+
+            Set.prototype.union = function(setToAdd)
+            {
+                for(var position = 0; position < SIZE; position++)
+                {
+                    if(setToAdd.bitArray.isSet(position))
+                        this.bitArray.setBit(position, 1);
+                }
+            }
+
+            var A = new Set([400, 401, 449, 4999, 69600]);
+            var B = new Set([600, 601, 602, 603, 604]);
+
+            A.union(B);
+
+            A.showElements();
+
+        </script>
+    </body>
+</html>
