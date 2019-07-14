@@ -44,8 +44,11 @@
                     this.size = values.length;
                     var posElementsArray = 0;
 
-                    for(var posElementsArray = 0; posElementsArray < SIZE; posElementsArray++)
-                        this.bitArray.setBit(values[posElementsArray], 1);
+                    for (value of values)
+                        this.bitArray.setBit(value, 1);
+
+                    //for(var posElementsArray = 0; posElementsArray < SIZE; posElementsArray++)
+                        //this.bitArray.setBit(values[posElementsArray], 1);
                 }
             }
 
@@ -92,27 +95,54 @@
                 return result;
             }
 
+            Set.equals = function(setA, setB)
+            {
+                var result = true;
+
+                if(setA.size === setB.size)
+                {
+                    for(var position = 0; position < SIZE; position++)
+                        if(setA.bitArray.isSet(position) != setB.bitArray.isSet(position))
+                        {
+                            result = false;
+                            break;
+                        }
+                }
+                else
+                    return false;
+                return result;
+            }
+
             var A = new Set([1, 2, 3, 6, 7, 8]);
             var B = new Set([2, 3, 5, 9]);
+            var C = new Set([12, 13, 5, 9]);
+            var D = new Set([12, 13, 5, 9]);
+
 
             console.log("lenght A :" + A.size);
             console.log("lenght B :" + B.size);
+            console.log("lenght C :" + C.size);
+            console.log("lenght D :" + D.size);
 
             var resultAdd = Set.union(A, B);
-            console.log("lenght union :" + resultAdd.size);
+            console.log("lenght A union B: " + resultAdd.size);
             resultAdd.showElements();
 
             console.log(" ");
 
             var resultIntersect = Set.intersection(A, B);
-            console.log("lenght intersection :" + resultIntersect.size);
+            console.log("lenght A intersection B: " + resultIntersect.size);
             resultIntersect.showElements();
 
             console.log(" ");
 
             var resultDifference = Set.difference(A, B);
-            console.log("lenght difference :" + resultDifference.size);
+            console.log("lenght A difference B: " + resultDifference.size);
             resultDifference.showElements();
+
+            console.log("A equals B ? " + Set.equals(A, B));
+            console.log("B equals C ? " + Set.equals(B, C));
+            console.log("C equals D ? " + Set.equals(C, D));
         </script>
     </body>
 </html>
