@@ -166,10 +166,10 @@ var C = new Set([12, 13, 5, 9]);
 var D = new Set([12, 13]);
 var F = new Set([4, 5, 9, 10]);
 
-console.log("lenght A :" + A.size);
-console.log("lenght B :" + B.size);
-console.log("lenght C :" + C.size);
-console.log("lenght D :" + D.size);
+console.log("length A :" + A.size);
+console.log("length B :" + B.size);
+console.log("length C :" + C.size);
+console.log("length D :" + D.size);
 
 console.log(" ");
 
@@ -192,19 +192,19 @@ console.log("D max ? " + D.getMax());
 console.log(" ");
 
 A.union(B);
-console.log("lenght A union B: " + A.size);
+console.log("length A union B: " + A.size);
 A.showElements();
 
 console.log(" ");
 
 B.intersection(C);
-console.log("lenght B intersection C: " + B.size);
+console.log("length B intersection C: " + B.size);
 B.showElements();
 
 console.log(" ");
 
 C.difference(F);
-console.log("lenght C difference F: " + C.size);
+console.log("length C difference F: " + C.size);
 C.showElements();
 
 console.log(" ");
@@ -239,5 +239,5 @@ console.log("A is disjunctive with F ? " + A.isDisjunctive(F));
 console.log(" ");
 
 C.unionDisjunctive(F);
-console.log("lenght C disjunctive union F: " + C.size);
+console.log("length C disjunctive union F: " + C.size);
 C.showElements();
