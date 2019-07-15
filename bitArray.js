@@ -124,26 +124,26 @@ Set.prototype.unionDisjunctive = function(set)
   else return null;
 };
 
-Set.prototype.intersection = function(set) 
+Set.prototype.intersect = function(set) 
 {
-  var result = new Set();
   for (var position = 0; position < SIZE; position++)
-    if (this.bitArray.isSet(position) && set.bitArray.isSet(position)) {
-      result.bitArray.setBit(position, 1);
-      result.size++;
-    }
-  this.assign(result);
+    if (this.bitArray.isSet(position))
+        if(!set.bitArray.isSet(position))
+        {
+            this.bitArray.setBit(position, 0);
+            this.size--;
+        }
 };
 
 Set.prototype.difference = function(set) 
 {
-  var result = new Set();
   for (var position = 0; position < SIZE; position++)
-    if (this.bitArray.isSet(position) && !set.bitArray.isSet(position)) {
-      result.bitArray.setBit(position, 1);
-      result.size++;
-    }
-  this.assign(result);
+    if (this.bitArray.isSet(position))
+        if(set.bitArray.isSet(position)) 
+        {
+            this.bitArray.setBit(position, 0);
+            this.size--;
+        }
 };
 
 Set.prototype.equals = function(set) 
@@ -151,7 +151,7 @@ Set.prototype.equals = function(set)
   var result = true;
   if (this.size === set.size)
     for (var position = 0; position < SIZE; position++) {
-      if (this.bitArray.isSet(position) != set.bitArray.isSet(position)) {
+      if (this.bitArray.isSet(position) !== set.bitArray.isSet(position)) {
         result = false;
         break;
       }
@@ -197,7 +197,7 @@ A.showElements();
 
 console.log(" ");
 
-B.intersection(C);
+B.intersect(C);
 console.log("length B intersection C: " + B.size);
 B.showElements();
 
