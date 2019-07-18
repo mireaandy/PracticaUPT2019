@@ -1,0 +1,101 @@
+<!DOCTYPE HTML>
+
+<head>
+	<title>Practica UPT 2019</title>
+	<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+	<script src="scripts.js"></script>
+	<div class="wrapper">
+
+		<div class="header">
+			<div class="header-text">
+				Practica UPT 2019
+			</div>
+		</div>
+
+		<div class="middle">
+
+			<div class="container">
+				<div class="content">
+					<table class="table">
+						<tr>
+							<td>
+								Set 1
+							</td>
+							<td>
+								<input type="text" id="Set1">
+							</td>
+						</tr>
+						<tr>
+							<td>
+								Set 2
+							</td>
+							<td>
+								<input type="text" id="Set2">
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<button type="button" onclick="onButtonAddClicked()"> Add items </button>
+							</td>
+							<td>
+								<button type="button" onclick="onButtonDeleteClicked()"> Delete items </button>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								Current set 1
+							</td>
+							<td>
+								<input type="text" id="currentSet1">
+							</td>
+							<td>
+								<button type="button" onclick="onButtonUnion1Clicked()"> Union sets </button>
+							</td>
+							<td>
+								<button type="button" onclick="onButtonIntersect1Clicked()"> Intersect sets </button>
+							</td>
+							<td>
+								<button type="button" onclick="onButtonDifference1Clicked()"> Difference sets </button>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								Current set 2
+							</td>
+							<td>
+								<input type="text" id="currentSet2">
+							</td>
+							<td>
+								<button type="button" onclick="onButtonUnion2Clicked()"> Union sets </button>
+							</td>
+							<td>
+								<button type="button" onclick="onButtonIntersect2Clicked()"> Intersect sets </button>
+							</td>
+							<td>
+								<button type="button" onclick="onButtonDifference2Clicked()"> Difference sets </button>
+							</td>
+						</tr>
+					</table>
+				</div>
+
+			</div>
+
+			<div class="left-sidebar">
+				<p> Choose the implementation method :</p>
+				<br>
+				<input type="checkbox" class="declare" value="bitArray"> bitArray<br>
+				<input type="checkbox" class="declare" value="linkedList"> linkedList<br>
+				<br>
+				<button type="button" onclick="declare()">DECLARE SET</button>
+			</div>
+
+		</div>
+
+	</div>
+
+</body>
+
+</html>
